@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      Multithreaded Programming(多线程编程)
-subtitle:   多线程编程)
+title:      Python - 多线程编程 ( Multithreaded Programming )
+subtitle:   Python - 多线程编程
 date:       2019-09-14
 author:     LZB
 header-img: img/post-bg-universe.jpg
@@ -336,3 +336,4 @@ Queue模块允许您创建一个可以容纳特定数量项目的新队列对象
     Exiting Thread-2
     Exiting Main Thread
     
+# END #
