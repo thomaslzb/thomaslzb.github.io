@@ -1,10 +1,10 @@
 # Site settings
 title: ""
-SEOTitle: This is LZB Bolg | BY Blog
+SEOTitle: This is LZB Bolg
 header-img: img/post-bg-desk.jpg
 email: thomaslzbuk@gmail.com
 description: "Every failure is leading towards success."
-keyword: "BY, BY Blog, LZB Bolg, Zibin Li, python, 李自斌, programmer"
+keyword: "LZB Bolg, Zibin Li, python, 李自斌, programmer"
 url: "http://thomaslzb.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/thomaslzb/thomaslzb.github.io" # you code repository
@@ -110,3 +110,15 @@ service-worker: true
 #        href: "https://developer.apple.com/"
 #    }
 # ]
+
+...
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-archives
+  - jekyll-responsive-image
+...
+

@@ -4,7 +4,7 @@ title:      Python - 多线程编程 Multithreaded Programming
 subtitle:   Python - 多线程编程
 date:       2019-09-14
 author:     LZB
-header-img: img/post-bg-universe.jpg
+header-img: img/post-bg-python-star.jpg
 catalog: true
 tags:
     - Python
