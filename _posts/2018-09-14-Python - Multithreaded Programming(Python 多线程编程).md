@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      Python - 多线程编程 ( Multithreaded Programming )
+title:      Python - 多线程编程 Multithreaded Programming
 subtitle:   Python - 多线程编程
 date:       2019-09-14
 author:     LZB

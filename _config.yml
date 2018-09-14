@@ -26,8 +26,6 @@ facebook_username:  thomaslzb
 twitter_username:   thomaslzbuk
 
 
-
-
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 permalink: pretty
@@ -40,8 +38,6 @@ anchorjs: true                          # if you want to customize anchor. check
 # Gems plugins
 # from PR#40, to support local preview for Jekyll 3.0
 plugins: [jekyll-paginate]
-
-
 
 
 # Markdown settings
@@ -57,13 +53,13 @@ kramdown:
 
 # 评论系统
 # Disqus（https://disqus.com/）
-# disqus_username: qiubaiying
+# disqus_username: thomaslzb
 
 # Gitalk
 gitalk:
-  enable: false    #是否开启Gitalk评论
-  clientID: f2c84e7629bb1446c1a4                            #生成的clientID
-  clientSecret: ca6d6139d1e1b8c43f8b2e19492ddcac8b322d0d    #生成的clientSecret
+  enable: true    #是否开启Gitalk评论
+  clientID: 99f7a491249683bbe5b1                            #生成的clientID
+  clientSecret: 66ce50705d971f8432f84a664688d9bb1a0d20f5    #生成的clientSecret
   repo: thomaslzb.github.io    #仓库名称
   owner: thomaslzb    #github用户名
   admin: thomaslzb
@@ -97,7 +93,7 @@ service-worker: true
 
 
 # Friends
-friends: []
+# friends: []
 
 # friends: [
 #    {
