@@ -2,7 +2,7 @@
 layout:     post
 title:      Python - 多线程编程 Multithreaded Programming
 subtitle:   Python - 多线程编程
-date:       2019-09-14
+date:       2018-09-17
 author:     LZB
 header-img: img/post-bg-python-star.jpg
 catalog: true
@@ -16,7 +16,7 @@ tags:
 
 - 进程中的多个线程与主线程共享相同的数据空间，因此可以比它们是单独的进程更容易地共享信息或相互通信。
 
-- 线程有时称为轻量级进程，它们不需要太多内存开销; 它们比流程便宜。
+- 线程(threading)有时称为轻量级进程，它们不需要太多内存开销; 它们比流程（progressing）便宜。
 
 线程有一个开头，一个执行序列和一个结论。 它有一个指令指针，可以跟踪当前运行的上下文。
 
@@ -25,63 +25,7 @@ tags:
 - 当其他线程正在运行时，它可以暂时被搁置（也称为休眠） - 这称为让步。
 
 ## 开始一个新线程 ##
-要生成另一个线程，您需要调用线程模块中可用的以下方法 -
-
-
-    thread.start_new_thread ( function, args[, kwargs] )
-
-
-此方法调用可以快速有效地在Linux和Windows中创建新线程。
-
-方法调用立即返回，子线程启动并使用传递的args列表调用函数。 当函数返回时，线程终止。
-
-在这里，args是一个参数元组; 使用空元组来调用函数而不传递任何参数。 kwargs是关键字参数的可选字典。
-
-### 示例 ###
-
-	#!/usr/bin/python
-	
-	import thread
-	import time
-	
-	# Define a function for the thread
-	def print_time( threadName, delay):
-	   count = 0
-	   while count < 5:
-		  time.sleep(delay)
-		  count += 1
-		  print "%s: %s" % ( threadName, time.ctime(time.time()) )
-	
-	# Create two threads as follows
-	try:
-	   thread.start_new_thread( print_time, ("Thread-1", 2, ) )
-	   thread.start_new_thread( print_time, ("Thread-2", 4, ) )
-	except:
-	   print "Error: unable to start thread"
-	
-	while 1:
-	   pass
-
-
-
-以上代码执行后，将返回以下结果
-
-    Thread-1: Thu Jan 22 15:42:17 2018
-    Thread-1: Thu Jan 22 15:42:19 2018
-    Thread-2: Thu Jan 22 15:42:19 2018
-    Thread-1: Thu Jan 22 15:42:21 2018
-    Thread-2: Thu Jan 22 15:42:23 2018
-    Thread-1: Thu Jan 22 15:42:23 2018
-    Thread-1: Thu Jan 22 15:42:25 2018
-    Thread-2: Thu Jan 22 15:42:27 2018
-    Thread-2: Thu Jan 22 15:42:31 2018
-    Thread-2: Thu Jan 22 15:42:35 2018
-    
-
-虽然它对于低级线程非常有效，但与新的线程模块相比，线程模块非常有限。
-
-## 线程模块 ##
-Python 2.4或以上中包含的较新的线程模块为线程提供了比前一节中讨论的线程模块更强大，更高级的支持。
+Python 2.4或以上中包含的较新的线程模块
 
 线程模块公开了线程模块的所有方法，并提供了一些额外的方法 - 
 
@@ -160,18 +104,21 @@ Python 2.4或以上中包含的较新的线程模块为线程提供了比前一�
     Starting Thread-1
     Starting Thread-2
     Exiting Main Thread
-    Thread-1: Thu Mar 21 09:10:03 2018
-    Thread-1: Thu Mar 21 09:10:04 2018
-    Thread-2: Thu Mar 21 09:10:04 2018
-    Thread-1: Thu Mar 21 09:10:05 2018
-    Thread-1: Thu Mar 21 09:10:06 2018
-    Thread-2: Thu Mar 21 09:10:06 2018
-    Thread-1: Thu Mar 21 09:10:07 2018
+    Thread-1: Mon Sep 17 13:09:08 2018
+    Thread-1: Mon Sep 17 13:09:09 2018
+    Thread-2: Mon Sep 17 13:09:09 2018
+    Thread-1: Mon Sep 17 13:09:10 2018
+    Thread-2: Mon Sep 17 13:09:11 2018
+    Thread-1: Mon Sep 17 13:09:11 2018
+    Thread-1: Mon Sep 17 13:09:12 2018
     Exiting Thread-1
-    Thread-2: Thu Mar 21 09:10:08 2018
-    Thread-2: Thu Mar 21 09:10:10 2018
-    Thread-2: Thu Mar 21 09:10:12 2018
+    Thread-2: Mon Sep 17 13:09:13 2018
+    Thread-2: Mon Sep 17 13:09:15 2018
+    Thread-2: Mon Sep 17 13:09:17 2018
     Exiting Thread-2
+    
+    Process finished with exit code 0
+    
     
 
 ## 同步线程 ##
@@ -185,30 +132,35 @@ Python提供的线程模块包含一个易于实现的锁定机制，允许您�
 
 ### 示例 ###
 
-	#!/usr/bin/python
+	
+	#-*-coding:utf-8-*-
 	
 	import threading
 	import time
 	
-	class myThread (threading.Thread):
-	   def __init__(self, threadID, name, counter):
-	      threading.Thread.__init__(self)
-	      self.threadID = threadID
-	      self.name = name
-	      self.counter = counter
-	   def run(self):
-	      print "Starting " + self.name
-	      # Get lock to synchronize threads
-	      threadLock.acquire()
-	      print_time(self.name, self.counter, 3)
-	      # Free lock to release next thread
-	      threadLock.release()
+	
+	class myThread(threading.Thread):
+	    def __init__(self, threadID, name, counter):
+	        threading.Thread.__init__(self)
+	        self.threadID = threadID
+	        self.name = name
+	        self.counter = counter
+	
+	    def run(self):
+	        print ("Starting " + self.name)
+	        # Get lock to synchronize threads
+	        threadLock.acquire()
+	        print_time(self.name, self.counter, 3)
+	        # Free lock to release next thread
+	        threadLock.release()
+	
 	
 	def print_time(threadName, delay, counter):
-	   while counter:
-	      time.sleep(delay)
-	      print "%s: %s" % (threadName, time.ctime(time.time()))
-	      counter -= 1
+	    while counter:
+	        time.sleep(delay)
+	        print ("%s: %s" % (threadName, time.ctime(time.time())))
+	        counter -= 1
+	
 	
 	threadLock = threading.Lock()
 	threads = []
@@ -228,20 +180,22 @@ Python提供的线程模块包含一个易于实现的锁定机制，允许您�
 	# Wait for all threads to complete
 	for t in threads:
 	    t.join()
-	print "Exiting Main Thread"
+	print ("Exiting Main Thread")
 
 以上代码执行结果
 
 
 	Starting Thread-1
 	Starting Thread-2
-	Thread-1: Thu Mar 21 09:11:28 2018
-	Thread-1: Thu Mar 21 09:11:29 2018
-	Thread-1: Thu Mar 21 09:11:30 2018
-	Thread-2: Thu Mar 21 09:11:32 2018
-	Thread-2: Thu Mar 21 09:11:34 2018
-	Thread-2: Thu Mar 21 09:11:36 2018
+	Thread-1: Mon Sep 17 13:28:37 2018
+	Thread-1: Mon Sep 17 13:28:38 2018
+	Thread-1: Mon Sep 17 13:28:39 2018
+	Thread-2: Mon Sep 17 13:28:41 2018
+	Thread-2: Mon Sep 17 13:28:43 2018
+	Thread-2: Mon Sep 17 13:28:45 2018
 	Exiting Main Thread
+	
+	Process finished with exit code 0
 
 
 ## 多线程优先级队列 ##
@@ -259,81 +213,90 @@ Queue模块允许您创建一个可以容纳特定数量项目的新队列对象
 
 ### 示例 ###
 	
-    #!/usr/bin/python
-    
-    import Queue
-    import threading
-    import time
-    
-    exitFlag = 0
-    
-    class myThread (threading.Thread):
-       def __init__(self, threadID, name, q):
-      threading.Thread.__init__(self)
-      self.threadID = threadID
-      self.name = name
-      self.q = q
-       def run(self):
-      print "Starting " + self.name
-      process_data(self.name, self.q)
-      print "Exiting " + self.name
-    
-    def process_data(threadName, q):
-       while not exitFlag:
-      queueLock.acquire()
-     if not workQueue.empty():
-    data = q.get()
-    queueLock.release()
-    print "%s processing %s" % (threadName, data)
-     else:
-    queueLock.release()
-     time.sleep(1)
-    
-    threadList = ["Thread-1", "Thread-2", "Thread-3"]
-    nameList = ["One", "Two", "Three", "Four", "Five"]
-    queueLock = threading.Lock()
-    workQueue = Queue.Queue(10)
-    threads = []
-    threadID = 1
-    
-    # Create new threads
-    for tName in threadList:
-       thread = myThread(threadID, tName, workQueue)
-       thread.start()
-       threads.append(thread)
-       threadID += 1
-    
-    # Fill the queue
-    queueLock.acquire()
-    for word in nameList:
-       workQueue.put(word)
-    queueLock.release()
-    
-    # Wait for queue to empty
-    while not workQueue.empty():
-       pass
-    
-    # Notify threads it's time to exit
-    exitFlag = 1
-    
-    # Wait for all threads to complete
-    for t in threads:
-       t.join()
-    print "Exiting Main Thread"
+	#-*-coding:utf-8-*-
+	
+	import queue
+	import threading
+	import time
+	
+	exitFlag = 0
+	
+	
+	class myThread(threading.Thread):
+	    def __init__(self, threadID, name, q):
+	
+	        threading.Thread.__init__(self)
+	        self.threadID = threadID
+	        self.name = name
+	        self.q = q
+	
+	
+	    def run(self):
+	        print("Starting " + self.name)
+	        process_data(self.name, self.q)
+	        print("Exiting " + self.name)
+	
+	def process_data(threadName, q):
+	    while not exitFlag:
+	        queueLock.acquire()
+	        if not workQueue.empty():
+	            data = q.get()
+	            queueLock.release()
+	            print("%s processing %s" % (threadName, data))
+	        else:
+	            queueLock.release()
+	            time.sleep(1)
+	
+	threadList = ["Thread-1", "Thread-2", "Thread-3"]
+	nameList = ["One", "Two", "Three", "Four", "Five"]
+	queueLock = threading.Lock()
+	workQueue = queue.Queue(10)
+	threads = []
+	threadID = 1
+	
+	# Create new threads
+	for tName in threadList:
+	    thread = myThread(threadID, tName, workQueue)
+	    thread.start()
+	    threads.append(thread)
+	    threadID += 1
+	
+	# Fill the queue
+	queueLock.acquire()
+	for word in nameList:
+	    workQueue.put(word)
+	queueLock.release()
+	
+	# Wait for queue to empty
+	while not workQueue.empty():
+	    pass
+	
+	# Notify threads it's time to exit
+	exitFlag = 1
+	
+	# Wait for all threads to complete
+	for t in threads:
+	    t.join()
+	print("Exiting Main Thread")
+
     
 以上代码的执行结果
-
+    
     Starting Thread-1
     Starting Thread-2
     Starting Thread-3
-    Thread-1 processing One
-    Thread-2 processing Two
+    Thread-3 processing One
+    Thread-3 processing Two
     Thread-3 processing Three
-    Thread-1 processing Four
-    Thread-2 processing Five
+    Thread-3 processing Four
+    Thread-3 processing Five
     Exiting Thread-3
     Exiting Thread-1
     Exiting Thread-2
     Exiting Main Thread
     
+    Process finished with exit code 0
+    
+
+*以上所有代码，均在Python 3.6下测试成功    
 # END #
