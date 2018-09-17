@@ -203,10 +203,12 @@ select {
   padding: 0em 0.4em;
   background: white;
 }
+
 select.sel-lang {
   min-height: 28px;
   font-size: 14px;
 }
+
 .table th,
 .table td {
   border: 1px solid #eee !important;
