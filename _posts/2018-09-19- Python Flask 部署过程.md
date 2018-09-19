@@ -4,7 +4,7 @@ title:      Python Flask 框架终极部署
 subtitle:   Uwsgi+Nginx+mysql+Supervisor+Virtualenv
 date:       2018-09-19
 author:     LZB
-header-img: img/post-bg-python-star.jpg
+header-img: img/post-bg-hacker.jpg
 catalog: true
 tags:
     - Python
@@ -12,8 +12,6 @@ tags:
 
 # Python Flask 框架终极部署 #
 ## Uwsgi+Nginx+mysql+Supervisor+Virtualenv, 基于阿里云默认Linux ##
-
-https://www.centos.bz/2017/11/python-flask-%E6%A1%86%E6%9E%B6-%E7%BB%88%E6%9E%81%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B%EF%BC%8C%E8%B6%85%E8%AF%A6%E7%BB%86%E3%80%82uwsginginxmysqlsupervisorvirtualenv-%E5%9F%BA%E4%BA%8E%E9%98%BF/
 
 ### 处理本地的代码 ###
 假设你已经完成了项目的开发，本地已经安装了git，那么首先将你的代码提交到git;
@@ -25,10 +23,6 @@ https://www.centos.bz/2017/11/python-flask-%E6%A1%86%E6%9E%B6-%E7%BB%88%E6%9E%81
 	git remote add origin http:xxxx.git  #这一步如果之前没做，那么你需要做。
 	git commmit -w 'first commit'
 
-
-导出开发中所有 flask 用到的包，方便新环境下一次性安装。
-
-    freeze > requirements.txt`  
 
 ### 安装Mysql ###
 
@@ -56,8 +50,21 @@ https://www.centos.bz/2017/11/python-flask-%E6%A1%86%E6%9E%B6-%E7%BB%88%E6%9E%81
 
 	workon xxx #切换到你的虚拟环境
 
-### 正式部署源码 ###
-使用FTP工具上传源码
+### 上传并部署源码 ###
+现在在服务器上安装git 拿到源码
+
+	apt install git
+	git init
+	git remote add origin http:xxx.git
+	git pull origin master # 拿到全部源码
+
+部署源码
+
+	进去项目根目录：
+	pip install -r requirements.txt  #导入你项目的flask 依赖
+	pip manager.py db migerate #初始化数据库  
+	# 这里如果出现初始化失败，那么清空你的 migration 文件夹，你会丢掉你的测试数据
+	pip manager.py db upgrade #导入数据库，代码迁移完成
 
 ### 安装Nginx ###
 
